@@ -1,0 +1,20 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lee.springboot_guava_cache.mapper.UserMapper">
+    <!--这里相当于实现了UserMapper接口，注意resultType使用了别名-->
+    <select id="getUsers" resultType="User">
+        select * from guava_user.user
+    </select>
+    <insert id="addUser" parameterType="User">
+        insert into user(user_id, user_name, user_age) values (#{userId}, #{userName}, #{userAge})
+    </insert>
+    <resultMap id="user" type="User">
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_age" property="userAge"/>
+    </resultMap>
+    <select id="getUsersByName" parameterType="string" resultMap="user">
+        select * from guava_user.user where user_name = #{userName}
+    </select>
+</mapper>
