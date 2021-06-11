@@ -1,0 +1,27 @@
+package cn.lee.springboot_ehcache.cntroller;
+
+import cn.lee.springboot_ehcache.Entity.User;
+import cn.lee.springboot_ehcache.service.UserService;
+import net.sf.ehcache.CacheManager;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
+
+@RestController
+public class UserController {
+    @Autowired
+    private UserService userService;
+    @Autowired
+    CacheManager cacheManager;
+
+    @GetMapping("/getusersbyname")
+    public List<User> getUsersByName(@RequestBody User user){
+        System.out.println("--------------------------");
+        System.out.println("call /getusersbyname");
+        System.out.println(cacheManager.toString());
+        return userService.getUsersByName(user.getUserName());
+    }
+}

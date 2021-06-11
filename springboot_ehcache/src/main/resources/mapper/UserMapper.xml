@@ -1,0 +1,13 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.lee.springboot_ehcache.mapper.UserMapper">
+    <resultMap id="user" type="User">
+        <id column="user_id" property="userId"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_age" property="userAge"/>
+    </resultMap>
+    <select id="getUsersByName" parameterType="string" resultMap="user">
+        select * from guava_user.user where user_name = #{userName}
+    </select>
+</mapper>
